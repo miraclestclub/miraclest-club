@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miraclest Club – Bimbingan Belajar & Konseling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --clr-bg: #f7f8fc;
+      --clr-white: #ffffff;
+      --clr-primary: #2563eb;
+      --clr-primary-dark: #1d4ed8;
+      --clr-secondary: #f59e0b;
+      --clr-accent: #10b981;
+      --clr-purple: #7c3aed;
+      --clr-text: #1e293b;
+      --clr-muted: #64748b;
+      --clr-border: #e2e8f0;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(37,99,235,0.10);
+      --shadow-lg: 0 8px 40px rgba(37,99,235,0.14);
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Nunito', sans-serif;
+      --transition: 0.25s cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── UTILITIES ── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; }
+    .section-sm { padding: 56px 0; }
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--clr-primary);
+      background: #dbeafe;
+      border-radius: 999px;
+      padding: 4px 14px;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--clr-text);
+    }
+    .section-sub {
+      color: var(--clr-muted);
+      font-size: 1.05rem;
+      margin-top: 10px;
+      max-width: 560px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .95rem;
+      border-radius: 999px;
+      padding: 13px 28px;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    .btn-primary {
+      background: var(--clr-primary);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(37,99,235,.3);
+    }
+    .btn-primary:hover { background: var(--clr-primary-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,.35); }
+    .btn-outline {
+      background: transparent;
+      color: var(--clr-primary);
+      border: 2px solid var(--clr-primary);
+    }
+    .btn-outline:hover { background: var(--clr-primary); color: #fff; transform: translateY(-2px); }
+    .btn-wa {
+      background: #25d366;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(37,211,102,.3);
+    }
+    .btn-wa:hover { background: #1fbd5b; transform: translateY(-2px); }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(247,248,252,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--clr-border);
+      transition: box-shadow var(--transition);
+    }
+    #navbar.scrolled { box-shadow: var(--shadow); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--clr-primary);
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-purple));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-weight: 600;
+      font-size: .93rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: var(--clr-muted);
+      transition: var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--clr-primary); background: #dbeafe; }
+    .nav-cta { display: flex; align-items: center; gap: 10px; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .hamburger span {
+      width: 24px; height: 2.5px;
+      background: var(--clr-text);
+      border-radius: 99px;
+      transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--clr-white);
+      border-top: 1px solid var(--clr-border);
+      padding: 16px 24px 24px;
+      gap: 4px;
+    }
+    .mobile-menu a {
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: var(--clr-muted);
+      display: block;
+      transition: var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--clr-primary); background: #dbeafe; }
+    .mobile-menu .mobile-cta { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+    .mobile-menu.open { display: flex; }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 100px;
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 50%, #fefce8 100%);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .45;
+      pointer-events: none;
+    }
+    .blob-1 { width: 420px; height: 420px; background: #bfdbfe; top: -80px; right: -60px; }
+    .blob-2 { width: 300px; height: 300px; background: #d1fae5; bottom: -60px; left: 10%; }
+    .blob-3 { width: 200px; height: 200px; background: #fde68a; bottom: 20%; right: 20%; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding-bottom: 80px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid var(--clr-border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--clr-muted);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .hero-badge span { color: var(--clr-accent); }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 1.07rem;
+      color: var(--clr-muted);
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-item .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--clr-primary);
+    }
+    .stat-item .stat-label { font-size: .85rem; color: var(--clr-muted); }
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hero-card-main {
+      background: var(--clr-white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      padding: 28px;
+      width: 100%;
+      max-width: 360px;
+    }
+    .mode-badges {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .mode-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    .mode-badge.online { background: #dbeafe; color: var(--clr-primary); }
+    .mode-badge.offline { background: #d1fae5; color: #059669; }
+    .subject-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .subject-pill {
+      background: var(--clr-bg);
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: .82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+    .subject-pill:hover { border-color: var(--clr-primary); background: #eff6ff; }
+    .subject-pill .icon { font-size: 1.1rem; }
+    .floating-badge {
+      position: absolute;
+      background: var(--clr-white);
+      border-radius: 14px;
+      box-shadow: var(--shadow-lg);
+      padding: 10px 16px;
+      font-size: .8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .floating-badge.top-left { top: 10px; left: -30px; animation-delay: 0s; }
+    .floating-badge.bot-right { bottom: 10px; right: -20px; animation-delay: 1.5s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { margin-top: 0; }
+      .floating-badge.top-left { left: 0; }
+      .floating-badge.bot-right { right: 0; }
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--clr-white); }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .about-card {
+      background: var(--clr-bg);
+      border-radius: var(--radius);
+      padding: 22px;
+      border: 1.5px solid var(--clr-border);
+      transition: var(--transition);
+    }
+    .about-card:hover { border-color: var(--clr-primary); box-shadow: var(--shadow); transform: translateY(-3px); }
+    .about-card.wide { grid-column: 1 / -1; }
+    .about-card .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .about-card h4 {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .about-card p { font-size: .87rem; color: var(--clr-muted); }
+    .about-text h2 { margin-bottom: 14px; }
+    .about-text p { color: var(--clr-muted); margin-bottom: 16px; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .95rem;
+    }
+    .check {
+      width: 22px; height: 22px; min-width: 22px;
+      background: #d1fae5;
+      color: var(--clr-accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ── PROGRAMS ── */
+    #programs { background: var(--clr-bg); }
+    .programs-header { text-align: center; margin-bottom: 48px; }
+    .programs-header .section-sub { margin: 0 auto; }
+    .levels-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .level-btn {
+      padding: 9px 22px;
+      border-radius: 999px;
+      border: 2px solid var(--clr-border);
+      background: var(--clr-white);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--clr-muted);
+    }
+    .level-btn.active, .level-btn:hover {
+      border-color: var(--clr-primary);
+      background: var(--clr-primary);
+      color: #fff;
+    }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 22px;
+    }
+    .program-card {
+      background: var(--clr-white);
+      border-radius: var(--radius);
+      padding: 26px;
+      border: 1.5px solid var(--clr-border);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .program-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 99px 99px 0 0;
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-purple));
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .program-card:hover { border-color: var(--clr-primary); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .program-card:hover::before { opacity: 1; }
+    .program-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .program-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .program-card p { font-size: .88rem; color: var(--clr-muted); margin-bottom: 16px; }
+    .program-levels {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .level-tag {
+      font-size: .75rem;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 3px 10px;
+    }
+    .level-tag.sd { background: #fef3c7; color: #d97706; }
+    .level-tag.smp { background: #dbeafe; color: #2563eb; }
+    .level-tag.sma { background: #ede9fe; color: #7c3aed; }
+    .program-card.special {
+      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+      border-color: #6ee7b7;
+    }
+    .program-card.special:hover { border-color: var(--clr-accent); }
+    .program-card.special::before { background: linear-gradient(90deg, var(--clr-accent), #3b82f6); }
+
+    /* ── JENJANG ── */
+    #jenjang { background: var(--clr-white); }
+    .jenjang-inner { display: flex; flex-direction: column; gap: 48px; }
+    .jenjang-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .jenjang-label {
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-purple));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      font-family: var(--font-display);
+    }
+    .jenjang-label .jenjang-name { font-size: 1.8rem; font-weight: 800; }
+    .jenjang-label .jenjang-desc { font-size: .82rem; opacity: .85; margin-top: 4px; }
+    .subjects-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .subject-card {
+      background: var(--clr-bg);
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
+      cursor: pointer;
+      min-width: 170px;
+    }
+    .subject-card:hover { border-color: var(--clr-primary); background: #eff6ff; transform: translateY(-2px); }
+    .subject-card .s-icon { font-size: 1.5rem; }
+    .subject-card h4 { font-size: .92rem; font-weight: 700; }
+    .subject-card p { font-size: .78rem; color: var(--clr-muted); }
+    @media (max-width: 700px) {
+      .jenjang-row { grid-template-columns: 1fr; }
+      .jenjang-label { display: flex; align-items: center; gap: 16px; text-align: left; }
+      .jenjang-label .jenjang-name { font-size: 1.3rem; }
+    }
+
+    /* ── SPECIAL CLASS ── */
+    #special { background: var(--clr-bg); }
+    .special-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .special-card {
+      border-radius: 24px;
+      padding: 36px;
+      overflow: hidden;
+      position: relative;
+      transition: var(--transition);
+    }
+    .special-card:hover { transform: translateY(-5px); }
+    .special-card.coding {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #fff;
+    }
+    .special-card.piano {
+      background: linear-gradient(135deg, #1c1917, #44403c);
+      color: #fff;
+    }
+    .special-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .special-card p { opacity: .8; margin-bottom: 20px; font-size: .95rem; }
+    .special-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .sh-tag {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+    .special-icon-big {
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 8rem;
+      opacity: .08;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .btn-light {
+      background: rgba(255,255,255,.15);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,.3);
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-light:hover { background: rgba(255,255,255,.28); }
+    @media (max-width: 700px) {
+      .special-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── MODE ── */
+    #mode { background: var(--clr-white); }
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .mode-card {
+      border-radius: 24px;
+      padding: 36px;
+      border: 1.5px solid var(--clr-border);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .mode-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .mode-card.online-card { background: linear-gradient(135deg, #eff6ff, #f0f9ff); border-color: #bae6fd; }
+    .mode-card.offline-card { background: linear-gradient(135deg, #f0fdf4, #fefce8); border-color: #bbf7d0; }
+    .mode-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mode-card p { color: var(--clr-muted); margin-bottom: 18px; }
+    .mode-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .mode-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .92rem;
+    }
+    @media (max-width: 700px) {
+      .mode-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--clr-bg); }
+    .testi-header { text-align: center; margin-bottom: 48px; }
+    .testi-header .section-sub { margin: 0 auto; }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+    }
+    .testi-card {
+      background: var(--clr-white);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1.5px solid var(--clr-border);
+      transition: var(--transition);
+    }
+    .testi-card:hover { border-color: var(--clr-primary); box-shadow: var(--shadow); transform: translateY(-3px); }
+    .stars { color: var(--clr-secondary); font-size: 1rem; margin-bottom: 12px; letter-spacing: 2px; }
+    .testi-text { font-size: .93rem; color: var(--clr-muted); margin-bottom: 20px; font-style: italic; line-height: 1.7; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .author-name { font-weight: 700; font-size: .93rem; }
+    .author-role { font-size: .8rem; color: var(--clr-muted); }
+
+    /* ── CTA ── */
+    #cta {
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-purple));
+      color: #fff;
+      text-align: center;
+      padding: 80px 0;
+    }
+    #cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    #cta p { font-size: 1.05rem; opacity: .85; max-width: 480px; margin: 0 auto 32px; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      background: #fff;
+      color: var(--clr-primary);
+      border: none;
+      padding: 14px 30px;
+      border-radius: 999px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    }
+    .btn-white:hover { background: #f1f5f9; transform: translateY(-2px); }
+    .btn-transparent {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,.5);
+      padding: 13px 28px;
+      border-radius: 999px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+    .btn-transparent:hover { background: rgba(255,255,255,.15); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--clr-white); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 20px; margin-top: 28px; }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: #eff6ff;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-item h4 { font-weight: 700; font-size: .95rem; margin-bottom: 2px; }
+    .contact-item p { font-size: .88rem; color: var(--clr-muted); }
+    .contact-form {
+      background: var(--clr-bg);
+      border-radius: 24px;
+      padding: 36px;
+      border: 1.5px solid var(--clr-border);
+    }
+    .contact-form h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+      color: var(--clr-text);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 11px 16px;
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: .93rem;
+      background: var(--clr-white);
+      color: var(--clr-text);
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 900px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--clr-text);
+      color: rgba(255,255,255,.7);
+      padding: 60px 0 32px;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { color: #fff; margin-bottom: 14px; }
+    .footer-brand p { font-size: .88rem; line-height: 1.7; max-width: 260px; }
+    .footer-col h4 {
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .95rem;
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-col ul li a {
+      font-size: .87rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { font-size: .85rem; }
+    .social-links { display: flex; gap: 10px; }
+    .social-btn {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--clr-primary); color: #fff; }
+    @media (max-width: 900px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+
+    /* ── WHATSAPP FAB ── */
+    .wa-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem;
+      box-shadow: 0 6px 24px rgba(37,211,102,.45);
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .wa-fab:hover { transform: scale(1.12); box-shadow: 0 10px 32px rgba(37,211,102,.55); }
+
+    /* ── SCROLL ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">
+        <div class="logo-icon">🌟</div>
+        Miraclest Club
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#programs">Program</a></li>
+        <li><a href="#jenjang">Jenjang</a></li>
+        <li><a href="#special">Kelas Spesial</a></li>
+        <li><a href="#mode">Metode</a></li>
+        <li><a href="#testimonials">Testimoni</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="https://wa.me/6281382794770" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+        <a href="#contact" class="btn btn-primary">Daftar Sekarang</a>
+      </div>
+      <div class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">Tentang Kami</a>
+    <a href="#programs">Program Belajar</a>
+    <a href="#jenjang">Jenjang</a>
+    <a href="#special">Kelas Spesial</a>
+    <a href="#mode">Metode Belajar</a>
+    <a href="#testimonials">Testimoni</a>
+    <a href="#contact">Kontak</a>
+    <div class="mobile-cta">
+      <a href="https://wa.me/6281382794770" target="_blank" class="btn btn-wa">💬 Chat WhatsApp</a>
+      <a href="#contact" class="btn btn-primary">Daftar Sekarang →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>✦</span> Berdiri sejak 2010 &nbsp;·&nbsp; <span>14+ tahun</span> mendampingi siswa
+        </div>
+        <h1 class="hero-title">
+          Bimbel <span class="highlight">Fun Learning</span><br>untuk Generasi Terbaik
+        </h1>
+        <p class="hero-desc">
+          Miraclest Club hadir untuk mendampingi siswa SD, SMP &amp; SMA dalam belajar lebih efektif dan menyenangkan. Tersedia kelas offline maupun online.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Daftar Sekarang →</a>
+          <a href="#programs" class="btn btn-outline">Lihat Program</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">100+</div>
+            <div class="stat-label">Siswa Alumni</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">14+</div>
+            <div class="stat-label">Tahun Pengalaman</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">98%</div>
+            <div class="stat-label">Nilai Meningkat</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-main">
+          <div class="mode-badges">
+            <span class="mode-badge online">🖥️ Online</span>
+            <span class="mode-badge offline">🏫 Offline</span>
+          </div>
+          <div class="subject-grid">
+            <div class="subject-pill"><span class="icon">🔢</span> Matematika</div>
+            <div class="subject-pill"><span class="icon">⚡</span> Fisika</div>
+            <div class="subject-pill"><span class="icon">🧪</span> Kimia</div>
+            <div class="subject-pill"><span class="icon">🌏</span> Bhs. Inggris</div>
+            <div class="subject-pill"><span class="icon">📖</span> Bhs. Indonesia</div>
+            <div class="subject-pill"><span class="icon">💻</span> Coding</div>
+            <div class="subject-pill"><span class="icon">🎹</span> Piano</div>
+            <div class="subject-pill"><span class="icon">🧠</span> Public Speaking</div>
+          </div>
+        </div>
+        <div class="floating-badge top-left">🏆 Top Rated Bimbel</div>
+        <div class="floating-badge bot-right">🎓 SD · SMP · SMA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-cards reveal">
+        <div class="about-card">
+          <div class="card-icon">🧠</div>
+          <h4>Brain Gym</h4>
+          <p>Aktivasi otak kiri dan kanan untuk belajar lebih optimal</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">🗺️</div>
+          <h4>Public Speaking</h4>
+          <p>Belajar menyampaikan ide dengan jelas, percaya diri, dan berkesan</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">🎯</div>
+          <h4>Fun Learning</h4>
+          <p>Konsep belajar yang menyenangkan dan tidak membebani</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">💬</div>
+          <h4>Konseling</h4>
+          <p>Pendampingan komunikasi dan pengembangan diri siswa</p>
+        </div>
+        <div class="about-card wide">
+          <div class="card-icon">⚖️</div>
+          <h4>Hard Skill + Soft Skill</h4>
+          <p>Memadukan kemampuan akademis dengan pengembangan karakter secara proporsional</p>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <span class="tag">Tentang Kami</span>
+        <h2 class="section-title">Mendampingi Siswa Sejak 2010</h2>
+        <p>
+          <strong>Miraclest Club</strong> adalah layanan bimbingan belajar dan konseling yang telah mendampingi ratusan siswa dari tingkatan SD hingga mahasiswa sejak tahun 2010.
+        </p>
+        <p>
+          Khususnya untuk siswa yang mengalami kesulitan dalam belajar, komunikasi, dan pengembangan diri. Kami hadir sebagai mitra belajar yang memahami setiap kebutuhan siswa.
+        </p>
+        <ul class="feature-list">
+          <li><span class="check">✓</span> Guru berpengalaman dan berdedikasi tinggi</li>
+          <li><span class="check">✓</span> Kurikulum sesuai standar nasional (Kurikulum Merdeka)</li>
+          <li><span class="check">✓</span> Kelas kecil – perhatian lebih untuk setiap siswa</li>
+          <li><span class="check">✓</span> Laporan kemajuan belajar berkala kepada orang tua</li>
+          <li><span class="check">✓</span> Fleksibel: bisa online maupun offline</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Konsultasi Gratis →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs" class="section">
+  <div class="container">
+    <div class="programs-header reveal">
+      <span class="tag">Program Unggulan</span>
+      <h2 class="section-title">Mata Pelajaran yang Kami Ajarkan</h2>
+      <p class="section-sub">Kurikulum terstruktur dan disesuaikan dengan jenjang pendidikan setiap siswa</p>
+    </div>
+    <div class="programs-grid reveal">
+      <div class="program-card">
+        <div class="program-icon">🔢</div>
+        <h3>Matematika</h3>
+        <p>Dari aritmatika dasar hingga kalkulus. Metode step-by-step yang mudah dipahami.</p>
+        <div class="program-levels">
+          <span class="level-tag sd">SD</span>
+          <span class="level-tag smp">SMP</span>
+          <span class="level-tag sma">SMA</span>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">⚡</div>
+        <h3>Fisika</h3>
+        <p>Konsep fisika dengan pendekatan praktis dan eksperimen sederhana yang menyenangkan.</p>
+        <div class="program-levels">
+          <span class="level-tag smp">SMP</span>
+          <span class="level-tag sma">SMA</span>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">🧪</div>
+        <h3>Kimia (IPA)</h3>
+        <p>Pemahaman reaksi kimia, tabel periodik dan soal-soal UTBK/SNBT.</p>
+        <div class="program-levels">
+          <span class="level-tag smp">SMP</span>
+          <span class="level-tag sma">SMA</span>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">🌏</div>
+        <h3>Bahasa Inggris</h3>
+        <p>Grammar, speaking, writing, hingga persiapan TOEFL dan ujian nasional.</p>
+        <div class="program-levels">
+          <span class="level-tag sd">SD</span>
+          <span class="level-tag smp">SMP</span>
+          <span class="level-tag sma">SMA</span>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">📖</div>
+        <h3>Bahasa Indonesia</h3>
+        <p>Membaca kritis, menulis esai, tata bahasa dan persiapan ujian nasional.</p>
+        <div class="program-levels">
+          <span class="level-tag sd">SD</span>
+          <span class="level-tag smp">SMP</span>
+          <span class="level-tag sma">SMA</span>
+        </div>
+      </div>
+      <div class="program-card special">
+        <div class="program-icon">💻</div>
+        <h3>Coding for Kids</h3>
+        <p>Belajar pemrograman dasar, Scratch, Python, dan logika berpikir computational.</p>
+        <div class="program-levels">
+          <span class="level-tag sd">SD</span>
+          <span class="level-tag smp">SMP</span>
+        </div>
+      </div>
+      <div class="program-card special">
+        <div class="program-icon">🎹</div>
+        <h3>Kelas Piano</h3>
+        <p>Belajar piano dari nol hingga mahir. Notasi, teknik, dan repertoar klasik maupun populer.</p>
+        <div class="program-levels">
+          <span class="level-tag sd">SD</span>
+          <span class="level-tag smp">SMP</span>
+          <span class="level-tag sma">SMA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JENJANG -->
+<section id="jenjang" class="section">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px">
+      <span class="tag">Jenjang Pendidikan</span>
+      <h2 class="section-title">Program Sesuai Jenjang Siswa</h2>
+      <p class="section-sub">Materi dan metode disesuaikan secara khusus untuk setiap tingkatan</p>
+    </div>
+    <div class="jenjang-inner">
+      <div class="jenjang-row reveal">
+        <div class="jenjang-label">
+          <div class="jenjang-name">SD</div>
+          <div class="jenjang-desc">Kelas 1–6</div>
+        </div>
+        <div class="subjects-row">
+          <div class="subject-card"><span class="s-icon">🔢</span><div><h4>Matematika</h4><p>Dasar berhitung & logika</p></div></div>
+          <div class="subject-card"><span class="s-icon">🌏</span><div><h4>Bhs. Inggris</h4><p>Vocab, grammar dasar</p></div></div>
+          <div class="subject-card"><span class="s-icon">📖</span><div><h4>Bhs. Indonesia</h4><p>Membaca & menulis</p></div></div>
+          <div class="subject-card"><span class="s-icon">💻</span><div><h4>Coding for Kids</h4><p>Scratch & logika dasar</p></div></div>
+          <div class="subject-card"><span class="s-icon">🎹</span><div><h4>Piano</h4><p>Notasi & teknik dasar</p></div></div>
+        </div>
+      </div>
+      <div class="jenjang-row reveal">
+        <div class="jenjang-label" style="background: linear-gradient(135deg, #0891b2, #0284c7)">
+          <div class="jenjang-name">SMP</div>
+          <div class="jenjang-desc">Kelas 7–9</div>
+        </div>
+        <div class="subjects-row">
+          <div class="subject-card"><span class="s-icon">🔢</span><div><h4>Matematika</h4><p>Aljabar, geometri</p></div></div>
+          <div class="subject-card"><span class="s-icon">⚡</span><div><h4>Fisika (IPA)</h4><p>Mekanika, gelombang</p></div></div>
+          <div class="subject-card"><span class="s-icon">🧪</span><div><h4>Kimia (IPA)</h4><p>Unsur, reaksi dasar</p></div></div>
+          <div class="subject-card"><span class="s-icon">🌏</span><div><h4>Bhs. Inggris</h4><p>Tenses, reading</p></div></div>
+          <div class="subject-card"><span class="s-icon">📖</span><div><h4>Bhs. Indonesia</h4><p>Esai & sastra</p></div></div>
+          <div class="subject-card"><span class="s-icon">💻</span><div><h4>Coding</h4><p>Python, web dasar</p></div></div>
+        </div>
+      </div>
+      <div class="jenjang-row reveal">
+        <div class="jenjang-label" style="background: linear-gradient(135deg, #7c3aed, #9333ea)">
+          <div class="jenjang-name">SMA</div>
+          <div class="jenjang-desc">Kelas 10–12</div>
+        </div>
+        <div class="subjects-row">
+          <div class="subject-card"><span class="s-icon">🔢</span><div><h4>Matematika</h4><p>Kalkulus, statistika</p></div></div>
+          <div class="subject-card"><span class="s-icon">⚡</span><div><h4>Fisika</h4><p>Listrik, termodinamika</p></div></div>
+          <div class="subject-card"><span class="s-icon">🧪</span><div><h4>Kimia</h4><p>Kimia organik, UTBK</p></div></div>
+          <div class="subject-card"><span class="s-icon">🌏</span><div><h4>Bhs. Inggris</h4><p>TOEFL, ujian nasional</p></div></div>
+          <div class="subject-card"><span class="s-icon">📖</span><div><h4>Bhs. Indonesia</h4><p>SNBT & UN</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIAL CLASSES -->
+<section id="special" class="section">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px">
+      <span class="tag">Kelas Spesial</span>
+      <h2 class="section-title">Lebih dari Sekedar Bimbel</h2>
+      <p class="section-sub">Kelas tambahan untuk mengembangkan skill dan bakat anak di luar akademis</p>
+    </div>
+    <div class="special-grid reveal">
+      <div class="special-card coding">
+        <div class="special-icon-big">💻</div>
+        <h3>Coding for Kids</h3>
+        <p>Persiapkan anak untuk era digital. Belajar berpikir logis dan kreatif lewat pemrograman.</p>
+        <div class="special-highlights">
+          <span class="sh-tag">Scratch</span>
+          <span class="sh-tag">Python</span>
+          <span class="sh-tag">Web Basic</span>
+          <span class="sh-tag">Game Dev</span>
+          <span class="sh-tag">SD – SMP</span>
+        </div>
+        <a href="#contact" class="btn-light">Daftar Kelas Coding →</a>
+      </div>
+      <div class="special-card piano">
+        <div class="special-icon-big">🎹</div>
+        <h3>Kelas Piano</h3>
+        <p>Dari pemula hingga tingkat lanjut. Belajar dengan metode yang menyenangkan dan terstruktur.</p>
+        <div class="special-highlights">
+          <span class="sh-tag">Notasi Dasar</span>
+          <span class="sh-tag">Teknik Jari</span>
+          <span class="sh-tag">Klasik & Pop</span>
+          <span class="sh-tag">Semua Usia</span>
+        </div>
+        <a href="#contact" class="btn-light">Daftar Kelas Piano →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING MODE -->
+<section id="mode" class="section">
+  <div class="container">
+    <div class="reveal" style="text-align:center; margin-bottom:48px">
+      <span class="tag">Metode Belajar</span>
+      <h2 class="section-title">Fleksibel Sesuai Kebutuhan Kamu</h2>
+      <p class="section-sub" style="margin:10px auto 0">Pilih kelas online atau offline — keduanya tersedia dengan kualitas yang sama</p>
+    </div>
+    <div class="mode-grid reveal">
+      <div class="mode-card online-card">
+        <h3>🖥️ Kelas Online</h3>
+        <p>Belajar dari mana saja tanpa batas. Platform interaktif dengan guru yang sama baiknya.</p>
+        <ul class="mode-features">
+          <li><span class="check">✓</span> Video call langsung dengan guru</li>
+          <li><span class="check">✓</span> Whiteboard digital interaktif</li>
+          <li><span class="check">✓</span> Rekaman sesi untuk review ulang</li>
+          <li><span class="check">✓</span> Materi & soal latihan digital</li>
+          <li><span class="check">✓</span> Fleksibel jadwal, bisa request</li>
+        </ul>
+      </div>
+      <div class="mode-card offline-card">
+        <h3>🏫 Kelas Offline</h3>
+        <p>Tatap muka langsung untuk pengalaman belajar yang lebih personal dan interaktif.</p>
+        <ul class="mode-features">
+          <li><span class="check">✓</span> Lokasi strategis dan nyaman</li>
+          <li><span class="check">✓</span> Kelas kecil maksimal 5-6 siswa</li>
+          <li><span class="check">✓</span> Buku & modul cetak lengkap</li>
+          <li><span class="check">✓</span> Try out & evaluasi berkala</li>
+          <li><span class="check">✓</span> Suasana belajar yang kondusif</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <div class="testi-header reveal">
+      <span class="tag">Testimoni</span>
+      <h2 class="section-title">Kata Mereka tentang Miraclest Club</h2>
+      <p class="section-sub">Ribuan orang tua dan siswa telah merasakan manfaatnya</p>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Nilai matematika anak saya naik drastis dari 60 ke 95 dalam 3 bulan. Gurunya sabar dan metode belajarnya sangat menyenangkan!"</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#dbeafe;color:#2563eb">B</div>
+          <div><div class="author-name">Bu Ratna S.</div><div class="author-role">Ibu dari siswa SMP</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Anak saya sekarang jago coding! Dia bisa bikin game sendiri di Scratch setelah 2 bulan ikut kelas. Sangat recommended!"</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#d1fae5;color:#059669">A</div>
+          <div><div class="author-name">Pak Ahmad F.</div><div class="author-role">Ayah dari siswa SD</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Kelas pianonya seru banget! Baru 6 bulan sudah bisa mainkan lagu favorit saya. Guru di sini sangat pandai mengajar."</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#ede9fe;color:#7c3aed">S</div>
+          <div><div class="author-name">Sinta, 14 tahun</div><div class="author-role">Siswa Kelas Piano</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Berkat bimbingan kimia di Miraclest Club, anak kami lolos SNBT dan masuk PTN impiannya. Terima kasih banyak!"</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#fef3c7;color:#d97706">W</div>
+          <div><div class="author-name">Bu Wati H.</div><div class="author-role">Ibu dari siswa SMA</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Online class-nya mantap! Bisa belajar dari rumah dengan kualitas yang sama. Fitur whiteboard digitalnya memudahkan sekali."</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#fee2e2;color:#dc2626">D</div>
+          <div><div class="author-name">Dinda, 16 tahun</div><div class="author-role">Siswa SMA – Online Class</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Mind mapping yang diajarkan sangat membantu anak saya belajar lebih efisien. Sekarang dia lebih percaya diri di sekolah!"</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#dcfce7;color:#16a34a">R</div>
+          <div><div class="author-name">Pak Rudi M.</div><div class="author-role">Ayah dari siswa SMP</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta">
+  <div class="container">
+    <h2>Siap Mulai Perjalanan Belajar yang Menyenangkan?</h2>
+    <p>Konsultasi gratis tanpa biaya. Kami akan bantu pilih program yang paling tepat untuk anak Anda.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/6281382794770" target="_blank" class="btn-white">💬 Chat WhatsApp</a>
+      <a href="#contact" class="btn-transparent">📋 Isi Formulir Pendaftaran</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="reveal">
+        <span class="tag">Hubungi Kami</span>
+        <h2 class="section-title">Mulai Perjalanan Belajarmu</h2>
+        <p class="section-sub">Isi form di bawah atau hubungi kami langsung. Konsultasi gratis!</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Lokasi</h4>
+              <p>Jl. Bintan Raya No. 163, Bekasi Timur<br>(Sesuaikan dengan lokasi asli Anda)</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <h4>WhatsApp</h4>
+              <p>+62 81382794770<br>Senin – Sabtu, 08.00 – 20.00 WIB</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <h4>Email</h4>
+              <p>miraclestclub@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <h4>Jam Operasional</h4>
+              <p>Senin–Jumat: 14.00–21.00 WIB<br>Sabtu: 08.00–17.00 WIB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <h3>📋 Formulir Pendaftaran</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nama Orang Tua/Wali</label>
+            <input type="text" id="namaOrtu" placeholder="Nama lengkap" />
+          </div>
+          <div class="form-group">
+            <label>Nama Siswa</label>
+            <input type="text" id="namaSiswa" placeholder="Nama siswa" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>No. WhatsApp</label>
+            <input type="tel" id="wa" placeholder="08xx-xxxx-xxxx" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="email@example.com" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Jenjang Pendidikan</label>
+            <select id="kelasjenjang">
+              <option value="">Pilih jenjang...</option>
+              <option>SD (Kelas 1-3)</option>
+              <option>SD (Kelas 4-6)</option>
+              <option>SMP (Kelas 7-9)</option>
+              <option>SMA (Kelas 10-12)</option>
+              <option>Persiapan Kuliah</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Metode Belajar</label>
+            <select id="metode">
+              <option value="">Pilih metode...</option>
+              <option>Online</option>
+              <option>Offline</option>
+              <option>Campuran (Online + Offline)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Program yang Diminati</label>
+          <select id="program">
+            <option value="">Pilih program...</option>
+            <option>Matematika</option>
+            <option>Fisika</option>
+            <option>Kimia (IPA)</option>
+            <option>Bahasa Inggris</option>
+            <option>Bahasa Indonesia</option>
+            <option>Coding for Kids</option>
+            <option>Kelas Piano</option>
+            <option>Paket Lengkap IPA</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Pesan / Kebutuhan Khusus</label>
+          <textarea id="pesan" placeholder="Ceritakan kebutuhan belajar anak Anda..."></textarea>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="handleSubmit(event)">
+          Kirim Pendaftaran →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:14px">
+          <div class="logo-icon">🌟</div>
+          Miraclest Club
+        </div>
+        <p>Bimbingan belajar dan konseling terpercaya sejak 2010. Mendampingi siswa SD, SMP, SMA dengan metode Fun Learning yang efektif.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Program</h4>
+        <ul>
+          <li><a href="#programs">Matematika</a></li>
+          <li><a href="#programs">Fisika</a></li>
+          <li><a href="#programs">Kimia (IPA)</a></li>
+          <li><a href="#programs">Bahasa Inggris</a></li>
+          <li><a href="#programs">Bahasa Indonesia</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kelas Spesial</h4>
+        <ul>
+          <li><a href="#special">Coding for Kids</a></li>
+          <li><a href="#special">Kelas Piano</a></li>
+          <li><a href="#mode">Kelas Online</a></li>
+          <li><a href="#mode">Kelas Offline</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="#about">Tentang Kami</a></li>
+          <li><a href="#testimonials">Testimoni</a></li>
+          <li><a href="#contact">Hubungi Kami</a></li>
+          <li><a href="https://wa.me/6281382794770" target="_blank">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Miraclest Club. Semua hak dilindungi.</p>
+      <div class="social-links">
+        <a href="#" class="social-btn">📘</a>
+        <a href="#" class="social-btn">📸</a>
+        <a href="https://wa.me/6281382794770" target="_blank" class="social-btn">💬</a>
+        <a href="#" class="social-btn">▶️</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/6281382794770" target="_blank" class="wa-fab" title="Chat WhatsApp">💬</a>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+  e.preventDefault();
+
+  const namaOrtu = document.getElementById('namaOrtu').value;
+  const namaSiswa = document.getElementById('namaSiswa').value;
+  const wa = document.getElementById('wa').value;
+  const email = document.getElementById('email').value;
+  const kelasjenjang = document.getElementById('kelasjenjang').value;
+  const metode = document.getElementById('metode').value;
+  const program = document.getElementById('program').value;
+  const pesan = document.getElementById('pesan').value;
+
+  const nomorAdmin = "6281382794770";
+
+  const text =
+`Halo Miraclest Club,
+
+Saya ingin mendaftarkan siswa.
+
+Nama Orang Tua/Wali: ${namaOrtu}
+Nama Siswa: ${namaSiswa}
+No. WhatsApp: ${wa}
+Email: ${email}
+
+Jenjang: ${kelasjenjang}
+Metode Belajar: ${metode}
+Program: ${program}
+
+Pesan:
+${pesan}`;
+
+  const url =
+    `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(text)}`;
+
+  window.open(url, "_blank");
+}
+</script>
+</body>
+</html>
